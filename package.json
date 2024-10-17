@@ -1,7 +1,7 @@
 {
   "name": "custom-audio-voice-recorder",
   "private": false,
-  "version": "1.0.4",
+  "version": "1.0.8",
   "type": "module",
   "license": "MIT",
   "author": "phamdacthanh197vh",

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 export interface recorderControls {
   startRecording: () => void;
@@ -145,10 +145,14 @@ const useAudioRecorder: (
     }, [mediaRecorder, setIsPaused, _startTimer, _stopTimer]);
 
     const clearGenfile: () => void = useCallback(() => {
+      mediaRecorder?.stop();
+      _stopTimer();
+      setRecordingTime(0);
+      setIsRecording(false);
+      setIsPaused(false);
       setActiveGenfile(false);
       setRecordingBlob(undefined);
-
-    }, [setRecordingBlob]);
+    }, [mediaRecorder, _stopTimer]);
 
     return {
       startRecording,

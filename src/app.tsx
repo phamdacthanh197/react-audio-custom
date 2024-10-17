@@ -36,7 +36,7 @@ const App = () => {
                 recorderControls={recorderControls}
                 onNotAllowedOrFound={(err) => console.table(err)}
                 showVisualizer={true}
-                downloadOnSavePress={false}
+                downloadOnSavePress={true}
                 downloadFileExtension="mp3"
             />
         </>

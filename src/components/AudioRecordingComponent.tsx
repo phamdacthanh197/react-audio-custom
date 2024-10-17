@@ -137,10 +137,10 @@ const AudioRecorder: (props: Props) => ReactElement = ({
   };
 
   useEffect(() => {
-    if (
-      (shouldSave || recorderControls) &&
-      recordingBlob != null &&
-      onRecordingComplete != null
+    if
+      (shouldSave && recorderControls &&
+      recordingBlob &&
+      onRecordingComplete
     ) {
       onRecordingComplete(recordingBlob);
       if (downloadOnSavePress) {
@@ -150,17 +150,17 @@ const AudioRecorder: (props: Props) => ReactElement = ({
   }, [recordingBlob]);
 
 
-  useMemo(async () => {
-    if
-      (isActiveGenFile && recorderControls &&
-      recordingBlob != null && onGenfileComplete != null
-    ) {
-      let file = await genFileWithoutDownload(recordingBlob)
-      if (file) {
-        onGenfileComplete(file)
+  useEffect(() => {
+    const generateFile = async () => {
+      if (isActiveGenFile && recorderControls && recordingBlob && onGenfileComplete) {
+        const file = await genFileWithoutDownload(recordingBlob);
+        if (file) {
+          onGenfileComplete(file);
+        }
       }
-    }
-  }, [recordingBlob, isActiveGenFile])
+    };
+    generateFile();
+  }, [isActiveGenFile, recorderControls, recordingBlob, onGenfileComplete, genFileWithoutDownload]);
 
   return (
     <div
